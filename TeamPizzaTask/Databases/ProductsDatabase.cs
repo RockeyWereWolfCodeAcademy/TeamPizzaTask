@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeamPizzaTask.Enums
+namespace TeamPizzaTask.Databases
 {
-    internal enum RoleEnum
+    internal static class ProductsDatabase
     {
-        User,
-        AdminUser
     }
 }
