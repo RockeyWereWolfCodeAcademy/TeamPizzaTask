@@ -8,5 +8,6 @@ namespace TeamPizzaTask.Models
 {
     internal class User
     {
+
     }
 }

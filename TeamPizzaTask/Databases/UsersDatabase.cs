@@ -8,5 +8,6 @@ namespace TeamPizzaTask.Databases
 {
     internal static class UsersDatabase
     {
+
     }
 }
