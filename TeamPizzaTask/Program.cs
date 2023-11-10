@@ -1,4 +1,8 @@
-﻿namespace TeamPizzaTask
+﻿using System.Threading.Channels;
+using TeamPizzaTask.Models;
+using TeamPizzaTask.Services;
+
+namespace TeamPizzaTask
 {
     internal class Program
     {
