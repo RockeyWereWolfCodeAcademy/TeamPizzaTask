@@ -110,11 +110,11 @@ namespace TeamPizzaTask.Services
             Console.Write("Enter your password: ");
             string password = Console.ReadLine();
 
-            var user = Program.CurrentUser = UsersDatabase.Users.Find(u => u.Login == username && u.Password == password); // Maybe problem with u.Login, should be u.Username
+            var user = Program.CurrentUser = UsersDatabase.Users.Find(u => u.Login == username && u.Password == password); 
 
             if (user != null)
             {
-                Console.WriteLine($"\nWelcome, {user.Name} {user.Surname}!");
+                Console.WriteLine($"\nWelcome, {user.Name} {user.Surname}!\n");
                 if (user.IsAdmin)
                 {
                     Console.WriteLine("You are logged in as an admin.\n");
