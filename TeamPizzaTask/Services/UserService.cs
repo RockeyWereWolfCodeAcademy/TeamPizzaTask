@@ -10,7 +10,7 @@ using TeamPizzaTask.Models;
 
 namespace TeamPizzaTask.Services
 {
-    public static class UserService
+    internal static class UserService
     {
         public static void AddUser(string name, string surname, string login, string password, bool isAdmin)
         {
@@ -114,11 +114,13 @@ namespace TeamPizzaTask.Services
 
             if (user != null)
             {
-                Console.WriteLine($"Welcome, {user.Name} {user.Surname}!");
+                Console.WriteLine($"\nWelcome, {user.Name} {user.Surname}!\n");
                 if (user.IsAdmin)
                 {
                     Console.WriteLine("You are logged in as an admin.\n");
+                    Program.UserMenu();
                 }
+                else Program.UserMenu();
             }
             else
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamPizzaTask.Models
 {
-    public class User
+    internal class User
     {
         static uint _id = 0;
         public uint Id { get; set; }
@@ -16,6 +16,7 @@ namespace TeamPizzaTask.Models
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
 
+        public List<Product> Cart = new List<Product>();
         public User() // Rufat added parameters here
         {
             _id++;

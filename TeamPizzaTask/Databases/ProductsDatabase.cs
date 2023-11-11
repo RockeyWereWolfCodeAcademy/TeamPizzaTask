@@ -11,5 +11,8 @@ namespace TeamPizzaTask.Databases
     internal static class ProductsDatabase
     {
         public static List<Product> Products { get; set; } = new List<Product>();
+        public static List<Product> Cart { get; set; } = new List<Product>();
+
+
     }
 }

@@ -7,7 +7,7 @@ using TeamPizzaTask.Models;
 
 namespace TeamPizzaTask.Databases
 {
-    public static class UsersDatabase
+    internal static class UsersDatabase
     {
         public static List<User> Users { get; set; } = new List<User>();
 
