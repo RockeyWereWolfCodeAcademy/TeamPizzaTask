@@ -23,14 +23,14 @@ namespace TeamPizzaTask.Services
         {
             var user = UsersDatabase.Users.Find(b => b.Id == id);
             if (user == null)
-                throw new UserNotFoundException("There is no product with this ID");
+                throw new UserNotFoundException("There is no user with this ID");
             else
                 return user;
         }
         public static void UpdateUser(uint id)
         {
             var user = GetUserById(id);
-            Console.WriteLine($"User {user.Login} admin status: {user.IsAdmin}");
+            Console.WriteLine($"\nUser {user.Login} admin status: {user.IsAdmin}");
             Console.WriteLine("Choose from options:");
             Console.WriteLine("1. Give admin rights");
             Console.WriteLine("2. Take admin rights");
@@ -45,7 +45,7 @@ namespace TeamPizzaTask.Services
                     user.IsAdmin = false;
                     break;
                 default:
-                    Console.WriteLine("Invalid option!");
+                    Console.WriteLine("Invalid option!\n");
                     break;
             }
         }
@@ -118,7 +118,7 @@ namespace TeamPizzaTask.Services
                 if (user.IsAdmin)
                 {
                     Console.WriteLine("You are logged in as an admin.\n");
-                    Program.UserMenu();
+                    Program.AdminMenu();
                 }
                 else Program.UserMenu();
             }

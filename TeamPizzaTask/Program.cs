@@ -17,32 +17,38 @@ namespace TeamPizzaTask
             ProductService.AddProduct("Vegetarian Pizza", 30);
 
             UserService.AddUser("admin", "admin", "admin", "admin", true); // Default admin yaradilir
-            while (true)
+            try
             {
-                Console.WriteLine("Choose from options:");
-                Console.WriteLine("1. Login");
-                Console.WriteLine("2. Registration");
-                Console.WriteLine("0. Exit from system\n");
-
-                char choice = Console.ReadKey(intercept: true).KeyChar;
-
-                switch (choice)
+                while (true)
                 {
-                    case '1':
-                        //implemented login method
-                        UserService.Login();
-                        break;
-                    case '2':
-                        //implemented register method
-                        UserService.Register();
-                        break;
-                    case '0':
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        Console.WriteLine("Invalid option! Try again...\n");
-                        break;
+                    Console.WriteLine("Choose from options:");
+                    Console.WriteLine("1. Login");
+                    Console.WriteLine("2. Registration");
+                    Console.WriteLine("0. Exit from system\n");
+
+                    char choice = Console.ReadKey(intercept: true).KeyChar;
+
+                    switch (choice)
+                    {
+                        case '1':
+                            //implemented login method
+                            UserService.Login();
+                            break;
+                        case '2':
+                            //implemented register method
+                            UserService.Register();
+                            break;
+                        case '0':
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            Console.WriteLine("Invalid option! Try again...\n");
+                            break;
+                    }
                 }
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -82,7 +88,7 @@ namespace TeamPizzaTask
             ProductService.GetProducts().ForEach(product => Console.WriteLine($"{product.Id}. {product.Name} Price: {product.Price} "));
             Console.Write("\nEnter ID of pizza to add to your cart: ");
             uint buyId = Convert.ToUInt32(Console.ReadLine());
-
+            InvalidOption:
             Console.WriteLine("\nPress 'S' to add a pizza to the cart, 'G' to return to Pizza Menu , or '0' to go back to the user menu:\n");
             char key = Console.ReadKey(intercept: true).KeyChar;
 
@@ -128,8 +134,8 @@ namespace TeamPizzaTask
             }
             else
             {
-                Console.WriteLine("\nInvalid key. Please try again.");
-                //ShowPizzaMenu();
+                Console.WriteLine("\nInvalid key. Please try again.\n");
+                goto InvalidOption;
             }
         }
 
@@ -167,6 +173,152 @@ namespace TeamPizzaTask
             Regex regex = new Regex(pattern);
 
             return regex.IsMatch(phoneNumber);
+        }
+
+        public static void AdminMenu()
+        {
+            Console.WriteLine("\nChoose what you want to do: ");
+            Console.WriteLine("1. Open User Menu");
+            Console.WriteLine("2. Open CRUD Menu");
+            Console.WriteLine("0. Log out\n");
+
+            char choice = Console.ReadKey(intercept: true).KeyChar;
+
+            while (choice != '0')
+            {
+                switch (choice)
+                {
+                    case '1':
+                        choice = '0';
+                        UserMenu();
+                        break;
+                    case '2':
+                        choice = '0';
+                        CrudMenu();
+                        break;
+                    case '0':
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option!\n");
+                        break;
+
+                }
+            }
+        }
+
+        static void CrudMenu()
+        {
+            Console.WriteLine("\nChoose from options:");
+            Console.WriteLine("1. Change Pizzas");
+            Console.WriteLine("2. Change Users");
+            Console.WriteLine("0. Log out\n");
+            char choice = Console.ReadKey(intercept: true).KeyChar;
+
+            while (choice != '0')
+            {
+                switch (choice)
+                {
+                    case '1':
+                        choice = '0';
+                        ProductsCrud();
+                        break;
+                    case '2':
+                        choice = '0';
+                        UsersCrud();
+                        break;
+                    case '0':
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option!\n");
+                        break;
+                }
+            }
+        }
+
+        static void UsersCrud()
+        {
+            Console.WriteLine("\nChoose from options:\n1. Show All users\n2. Add new user\n3. Update user\n4. Delete user\n0. Log out\n");
+            char choice = Console.ReadKey(intercept: true).KeyChar;
+            while (choice != '0')
+            {
+                switch (choice)
+                {
+                    case '1':
+                        UserService.GetUsers().ForEach(user => Console.WriteLine($"{user.Id}. {user.Login}, Name: {user.Name}, Surname: {user.Surname}, Admin Status:{user.IsAdmin}"));
+                        break;
+                    case '2':
+                        Console.Write("Enter username for new user: ");
+                        string username  = Console.ReadLine();
+                        Console.Write("Enter password for new user: ");
+                        string password = Console.ReadLine();
+                        Console.Write("Enter name for new user: ");
+                        string name = Console.ReadLine();
+                        Console.Write("Enter surname for new user: ");
+                        string surname = Console.ReadLine();
+                        AdminStatusCheck:
+                        Console.WriteLine("New user admin status(Yes/No): ");
+                        string adminStatus = Console.ReadLine().ToLower();
+                        bool isAdmin;
+                        if (adminStatus == "yes")
+                            isAdmin = true;
+                        else if (adminStatus == "no")
+                            isAdmin = false;
+                        else { Console.WriteLine("Invalid input"); goto AdminStatusCheck; }
+                        UserService.AddUser(name, surname, username, password, isAdmin);
+                        break;
+                    case '3':
+                        Console.Write("Enter ID of user to update: ");
+                        uint idToUpdate = Convert.ToUInt32(Console.ReadLine());
+                        UserService.UpdateUser(idToUpdate);
+                        break;
+                    case '4':
+                        Console.Write("Enter ID of user to remove: ");
+                        uint idToRemove = Convert.ToUInt32(Console.ReadLine());
+                        UserService.RemoveUser(idToRemove);
+                        break;
+                    case '0':
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option!\n");
+                        break;
+                }
+            }
+        }
+        static void ProductsCrud()
+        {
+            Console.WriteLine("\nChoose from options:\n1. Show All pzzas\n2. Add new pizza\n3. Update pizza\n4. Delete pizza\n0. Log out\n");
+            char choice = Console.ReadKey(intercept: true).KeyChar;
+            while (choice != '0')
+            {
+                switch (choice)
+                {
+                    case '1':
+                        ProductService.GetProducts().ForEach(product => Console.WriteLine($"{product.Id}. {product.Name}, Price: {product.Price}"));
+                        break;
+                    case '2':
+                        Console.Write("Enter name of new pizza: ");
+                        string name = Console.ReadLine();
+                        Console.Write("Enter price for new pizza: ");
+                        decimal price = Convert.ToDecimal(Console.ReadLine());
+                        ProductService.AddProduct(name, price);
+                        break;
+                    case '3':
+                        Console.Write("Enter ID of pizza to update: ");
+                        uint idToUpdate = Convert.ToUInt32(Console.ReadLine());
+                        ProductService.UpdateProduct(idToUpdate);
+                        break;
+                    case '4':
+                        Console.Write("Enter ID of pizza to remove: ");
+                        uint idToRemove = Convert.ToUInt32(Console.ReadLine());
+                        ProductService.RemoveProduct(idToRemove);
+                        break;
+                    case '0':
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option!\n");
+                        break;
+                }
+            }
         }
     }
 }

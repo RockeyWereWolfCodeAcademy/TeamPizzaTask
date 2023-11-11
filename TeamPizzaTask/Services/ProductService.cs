@@ -33,7 +33,7 @@ namespace TeamPizzaTask.Services
         public static void UpdateProduct(uint id)
         {
             var product = GetProductById(id);
-            Console.WriteLine("What do you want to update?");
+            Console.WriteLine("\nWhat do you want to update?");
             Console.WriteLine("1. Name");
             Console.WriteLine("2. Price");
             char choice = Console.ReadKey(intercept: true).KeyChar;
@@ -49,7 +49,7 @@ namespace TeamPizzaTask.Services
                     product.Price = Convert.ToDecimal(Console.ReadLine());
                     break;
                 default:
-                    Console.WriteLine("Invalid option!");
+                    Console.WriteLine("Invalid option!\n");
                     break;
             }
         }
