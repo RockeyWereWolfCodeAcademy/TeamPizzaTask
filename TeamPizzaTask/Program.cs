@@ -55,15 +55,16 @@ namespace TeamPizzaTask
         public static void UserMenu()
         {
 
-            Console.WriteLine("User menu:");
+            Console.WriteLine("\nUser menu:");
             Console.WriteLine("1. Show pizza menu");
             Console.WriteLine("2. Place your order");
             Console.WriteLine("0. Log out\n");
-            
-            char choice = Console.ReadKey(intercept: true).KeyChar;
+
+            char choice = ' ';
 
             while (choice != '0')
             {
+                choice = Console.ReadKey(intercept: true).KeyChar;
                 switch (choice)
                 {
                     case '1':
@@ -89,7 +90,7 @@ namespace TeamPizzaTask
             Console.Write("\nEnter ID of pizza to add to your cart: ");
             uint buyId = Convert.ToUInt32(Console.ReadLine());
             InvalidOption:
-            Console.WriteLine("\nPress 'S' to add a pizza to the cart, 'G' to return to Pizza Menu , or '0' to go back to the user menu:\n");
+            Console.WriteLine("\nPress 'S' to add a pizza to the cart, 'G' to return to Pizza Menu , or '0' to go back to the user menu:");
             char key = Console.ReadKey(intercept: true).KeyChar;
 
             if (key == 'S' || key == 's')
@@ -104,9 +105,9 @@ namespace TeamPizzaTask
                         Quantity = 0
                     });
 
-                    Console.WriteLine("Pizza added to cart.\n");
+                    Console.WriteLine("\nPizza added to cart.");
 
-                    Console.Write("Enter the quantity:");
+                    Console.Write("\nEnter the quantity: ");
                     int quantity = Convert.ToInt32(Console.ReadLine());
 
                     CurrentUser.Cart[CurrentUser.Cart.Count - 1].Quantity = quantity;
@@ -114,7 +115,7 @@ namespace TeamPizzaTask
                     Console.WriteLine($"{quantity} pizza(s) added to cart.\n");
 
                     Console.WriteLine("Your Cart:");
-                    CurrentUser.Cart.ForEach(cart => Console.WriteLine($"{cart.Id}. {cart.Name} Quantity: {cart.Quantity} Price: ${cart.Price * cart.Quantity}"));
+                    CurrentUser.Cart.ForEach(cart => Console.WriteLine($"{cart.Id}. {cart.Name} Quantity: {cart.Quantity} Price: ${cart.Price * cart.Quantity}\n"));
 
                     ShowPizzaMenu();
                 }
@@ -165,6 +166,7 @@ namespace TeamPizzaTask
             } while (!IsValidPhoneNumber(phoneNumber));
 
             Console.WriteLine($"Order placed! Total Price: ${totalPrice}, Address: {address}, Phone Number: {phoneNumber}");
+            UserMenu();
         }
 
         static bool IsValidPhoneNumber(string phoneNumber)
@@ -177,23 +179,22 @@ namespace TeamPizzaTask
 
         public static void AdminMenu()
         {
-            Console.WriteLine("\nChoose what you want to do: ");
+            Console.WriteLine("Choose what you want to do: ");
             Console.WriteLine("1. Open User Menu");
             Console.WriteLine("2. Open CRUD Menu");
-            Console.WriteLine("0. Log out\n");
+            Console.WriteLine("0. Log out");
 
-            char choice = Console.ReadKey(intercept: true).KeyChar;
+            char choice  = ' ';
 
             while (choice != '0')
             {
+                choice = Console.ReadKey(intercept: true).KeyChar;
                 switch (choice)
                 {
                     case '1':
-                        choice = '0';
                         UserMenu();
                         break;
                     case '2':
-                        choice = '0';
                         CrudMenu();
                         break;
                     case '0':
@@ -211,25 +212,23 @@ namespace TeamPizzaTask
             Console.WriteLine("\nChoose from options:");
             Console.WriteLine("1. Change Pizzas");
             Console.WriteLine("2. Change Users");
-            Console.WriteLine("0. Log out\n");
-            char choice = Console.ReadKey(intercept: true).KeyChar;
-
+            Console.WriteLine("0. Log out");
+            char choice = ' ';
             while (choice != '0')
             {
+                choice = Console.ReadKey(intercept: true).KeyChar;
                 switch (choice)
                 {
                     case '1':
-                        choice = '0';
                         ProductsCrud();
                         break;
                     case '2':
-                        choice = '0';
                         UsersCrud();
                         break;
                     case '0':
                         break;
                     default:
-                        Console.WriteLine("Invalid option!\n");
+                        Console.WriteLine("Invalid option!");
                         break;
                 }
             }
@@ -237,14 +236,15 @@ namespace TeamPizzaTask
 
         static void UsersCrud()
         {
-            Console.WriteLine("\nChoose from options:\n1. Show All users\n2. Add new user\n3. Update user\n4. Delete user\n0. Log out\n");
-            char choice = Console.ReadKey(intercept: true).KeyChar;
+            char choice = ' ';
             while (choice != '0')
             {
+                Console.WriteLine("\nChoose from options:\n1. Show All users\n2. Add new user\n3. Update user\n4. Delete user\n0. Log out\n");
+                choice = Console.ReadKey(intercept: true).KeyChar;
                 switch (choice)
                 {
                     case '1':
-                        UserService.GetUsers().ForEach(user => Console.WriteLine($"{user.Id}. {user.Login}, Name: {user.Name}, Surname: {user.Surname}, Admin Status:{user.IsAdmin}"));
+                        UserService.GetUsers().ForEach(user => Console.WriteLine($"{user.Id}. {user.Login}, Name: {user.Name}, Surname: {user.Surname}, Admin Status: {user.IsAdmin}"));
                         break;
                     case '2':
                         Console.Write("Enter username for new user: ");
@@ -286,10 +286,11 @@ namespace TeamPizzaTask
         }
         static void ProductsCrud()
         {
-            Console.WriteLine("\nChoose from options:\n1. Show All pzzas\n2. Add new pizza\n3. Update pizza\n4. Delete pizza\n0. Log out\n");
-            char choice = Console.ReadKey(intercept: true).KeyChar;
+            char choice = ' ';
             while (choice != '0')
             {
+                Console.WriteLine("\nChoose from options:\n1. Show All pizzas\n2. Add new pizza\n3. Update pizza\n4. Delete pizza\n0. Log out\n");
+                choice = Console.ReadKey(intercept: true).KeyChar;
                 switch (choice)
                 {
                     case '1':

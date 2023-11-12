@@ -41,11 +41,11 @@ namespace TeamPizzaTask.Services
             switch (choice)
             {
                 case '1':
-                    Console.Write("Enter new name: ");
+                    Console.Write("\nEnter new name: ");
                     product.Name = Console.ReadLine();
                     break;
                 case '2':
-                    Console.Write("Enter new price: ");
+                    Console.Write("\nEnter new price: ");
                     product.Price = Convert.ToDecimal(Console.ReadLine());
                     break;
                 default:

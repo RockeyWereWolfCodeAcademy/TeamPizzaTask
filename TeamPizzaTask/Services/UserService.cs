@@ -114,7 +114,7 @@ namespace TeamPizzaTask.Services
 
             if (user != null)
             {
-                Console.WriteLine($"\nWelcome, {user.Name} {user.Surname}!\n");
+                Console.WriteLine($"\nWelcome, {user.Name} {user.Surname}!");
                 if (user.IsAdmin)
                 {
                     Console.WriteLine("You are logged in as an admin.\n");
