@@ -46,10 +46,10 @@ This options are for entering in a CRUD menu:
 
 CRUD menus for pizzas and users are displayed.
 
-## How task was devided by this repo conributors:
- ### - Repository creation and management ->
- ### - Group lead -> 
- - User Login/Registration ->
- - User menu ->
- - Admin and CRUD menus ->
+## How task was devided by this repo contributors:
+ ### - Repository creation and management -> RockeyWereWolfCodeAcademy https://github.com/RockeyWereWolfCodeAcademy
+ ### - Group lead -> RockeyWereWolfCodeAcademy https://github.com/RockeyWereWolfCodeAcademy
+ - User Login/Registration -> RufatAzizov https://github.com/RufatAzizov
+ - User menu -> ibadovadil https://github.com/ibadovadil
+ - Admin and CRUD menus -> RockeyWereWolfCodeAcademy https://github.com/RockeyWereWolfCodeAcademy
  
